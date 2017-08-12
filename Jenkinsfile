@@ -3,8 +3,8 @@ pipeline {
   agent any
 
   stages {
-    node {
-      stage("Apply OC Build-Time things") {
+    stage("Apply OC Build-Time things") {
+      node {
         steps {
           sh "oc apply -f oc-manifests/build-time/"
         }
