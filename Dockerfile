@@ -1,5 +1,8 @@
 FROM nginx:alpine
 
+ADD make-writable /usr/local/bin/
+RUN chmod 755 /usr/local/bin/make-writable
+
 RUN mkdir -p /var/cache/nginx/client_temp && chgrp 0 /var/cache/nginx/client_temp
 RUN mkdir -p /var/cache/nginx/proxy_temp && chgrp 0 /var/cache/nginx/proxy_temp
 RUN mkdir -p /var/cache/nginx/fastcgi_temp && chgrp 0 /var/cache/nginx/fastcgi_temp
