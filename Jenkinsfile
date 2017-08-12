@@ -94,7 +94,11 @@ pipeline {
       }
     }
 
-    input message: "Continue?"
+    stage("Ask for input") {
+      steps {
+        input message: "Continue?"
+      }
+    }
 
     stage("Trigger Downstream") {
       steps {
