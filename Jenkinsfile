@@ -93,5 +93,18 @@ pipeline {
         )
       }
     }
+
+    stage("Build Images") {
+      steps {
+        script {
+          def gitCommit = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+          def shortCommit = gitCommit.take(8)
+          openshiftBuild(
+            bldCfg: 'nginx-static-app-pipeline',
+            showBuildLogs: 'true'
+          )
+        }
+      }
+    }
   }
 }
