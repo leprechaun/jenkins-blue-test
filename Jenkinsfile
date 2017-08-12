@@ -94,7 +94,7 @@ pipeline {
       }
     }
 
-    stage("Build Images") {
+    stage("Trigger Downstream") {
       steps {
         script {
           def gitCommit = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
