@@ -4,10 +4,8 @@ pipeline {
 
   stages {
     stage("Apply OC Build-Time things") {
-      node {
-        steps {
-          sh "oc apply -f oc-manifests/build-time/"
-        }
+      steps {
+        sh "oc apply -f oc-manifests/build-time/"
       }
     }
 
