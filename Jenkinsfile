@@ -103,8 +103,8 @@ pipeline {
 
     stage("Ask for input") {
       agent none
-      milestone 1
       steps {
+        milestone 1
         input message: "Continue?"
       }
     }
