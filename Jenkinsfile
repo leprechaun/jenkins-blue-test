@@ -109,6 +109,17 @@ pipeline {
       }
     }
 
+    stage("BS"){
+      agent any
+      steps {
+        script {
+          echo "Hello world"
+        }
+      }
+
+    }
+
+    /*
     stage("Trigger Downstream") {
       agent any
       steps {
@@ -122,5 +133,6 @@ pipeline {
         }
       }
     }
+    */
   }
 }
