@@ -95,6 +95,7 @@ pipeline {
     }
 
     stage("Ask for input") {
+      agent none
       steps {
         input message: "Continue?"
       }
