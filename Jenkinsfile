@@ -106,6 +106,7 @@ pipeline {
       steps {
         milestone 1
         input message: "Continue?"
+        milestone 2
       }
     }
 
