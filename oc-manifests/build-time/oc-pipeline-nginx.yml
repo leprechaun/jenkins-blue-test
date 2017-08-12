@@ -3,6 +3,7 @@ apiVersion: "v1"
 metadata:
   name: nginx-pipeline
 spec:
+  runPolicy: Parallel
   source:
     type: Git
     git:
