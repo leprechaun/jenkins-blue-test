@@ -94,6 +94,8 @@ pipeline {
       }
     }
 
+    input "do you want to continue?"
+
     stage("Trigger Downstream") {
       steps {
         script {
