@@ -16,9 +16,4 @@ RUN sed -i -e 's:/var/run/nginx.pid:/tmp/nginx.pid:g' /etc/nginx/nginx.conf
 RUN chgrp -R 0 /var/run/
 RUN chmod -R 777 /var/run
 
-ADD index.html /usr/share/nginx/html/index.html
-RUN sed -i -e "s/#DATE#/$(date)/g" /usr/share/nginx/html/index.html
-
-RUN env
-
 EXPOSE 8080
