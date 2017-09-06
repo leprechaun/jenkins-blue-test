@@ -1,17 +1,23 @@
 pipeline {
 
-  agent none
+  agent any
 
   stages {
+    stage("Hello world") {
+      steps {
+        echo "Hello world!"
+        sh "git rev-parse HEAD"
+      }
+    }
+
+    /*
     stage("Apply OC Build-Time things") {
-      agent any
       steps {
         sh "oc apply -f oc-manifests/build-time/"
       }
     }
 
     stage('Sanity Checks') {
-      agent any
       steps {
         parallel (
           "Commit message format": {
@@ -29,7 +35,6 @@ pipeline {
     }
 
     stage('Tests') {
-      agent any
       steps {
         parallel (
           "Unit Tests": {
@@ -46,7 +51,6 @@ pipeline {
     }
 
     stage("Build Images") {
-      agent any
       steps {
         script {
           def gitCommit = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
@@ -68,14 +72,12 @@ pipeline {
     }
 
     stage("Apply OC Run-Time things") {
-      agent any
       steps {
         sh "oc apply -f oc-manifests/run-time/"
       }
     }
 
     stage("Deploy: Testing ENV") {
-      agent any
       steps {
         script {
           def gitCommit = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
@@ -88,7 +90,6 @@ pipeline {
     }
 
     stage("Verify: Testing ENV") {
-      agent any
       steps {
         parallel(
           "curl1": {
@@ -102,7 +103,6 @@ pipeline {
     }
 
     stage("Ask for input") {
-      agent none
       steps {
         milestone 1
         input message: "Continue?"
@@ -111,7 +111,6 @@ pipeline {
     }
 
     stage("BS"){
-      agent any
       steps {
         script {
           echo "Hello world"
@@ -120,7 +119,6 @@ pipeline {
 
     }
 
-    /*
     stage("Trigger Downstream") {
       agent any
       steps {
