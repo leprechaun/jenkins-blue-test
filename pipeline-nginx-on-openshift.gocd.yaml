@@ -15,15 +15,15 @@ pipelines:
     stages:
       - build-image:
           tasks:
-            - exec:
-                command: docker
-                arguments:
-                  - build
-                  - -t
-                  - registry.k8s.fscker.org:80/leprechaun/nginx-on-openshift
-                  - .
-            - exec:
-                command: docker
-                arguments:
-                  - push
-                  - registry.k8s.fscker.org:80/leprechaun/nginx-on-openshift
+            - script: |
+                docker build -t registry.k8s.fscker.org:80/leprechaun/nginx-on-openshift \
+                  --label git-repo=https://github.com/leprechaun/nginx-on-openshift \
+                  --label git-commit=${GO_REVISION_GIT} \
+                  --label go-pipeline=${GO_PIPELINE_NAME} \
+                  --label go-pipeline-counter=${GO_PIPELINE_COUNTER} \
+                  --label go-pipeline-stage=${GO_STAGE_NAME} \
+                  --label go-pipeline-stage-counter=${GO_STAGE_COUNTER} \
+                  --label go-pipeline-job=${GO_JOB_NAME} \
+                  .
+            - script: |
+                docker push registry.k8s.fscker.org:80/leprechaun/nginx-on-openshift
