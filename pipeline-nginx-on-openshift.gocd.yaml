@@ -1,0 +1,29 @@
+pipelines:
+  nginx-on-openshift-build:
+    group: nginx-on-openshift
+    label_template: "${git[:8]}"
+    locking: "on"
+    timer:
+      spec: "* * * * * ? *"
+      only_on_changes: yes
+    materials:
+      git:
+        git: https://github.com/leprechaun/nginx-on-openshift.git
+        branch: master
+        auto_update: true
+        shallow_clone: true
+    stages:
+      - test-one:
+          tasks:
+            - exec:
+                command: docker
+                arguments:
+                  - build
+                  - -t
+                  - registry.k8s.fscker.org:80/leprechaun/nginx-on-openshift
+                  - .
+            - exec:
+                command: docker
+                arguments:
+                  - push
+                  - registry.k8s.fscker.org:80/leprechaun/nginx-on-openshift
