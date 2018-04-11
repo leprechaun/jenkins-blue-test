@@ -16,7 +16,7 @@ pipelines:
       - build-image:
           tasks:
             - script: |
-                docker build -t registry.k8s.fscker.org:80/leprechaun/nginx-on-openshift \
+                docker build -t registry.k8s.fscker.org/leprechaun/nginx-on-openshift \
                   --label git-repo=https://github.com/leprechaun/nginx-on-openshift \
                   --label git-commit=${GO_REVISION_GIT} \
                   --label go-pipeline=${GO_PIPELINE_NAME} \
@@ -26,4 +26,4 @@ pipelines:
                   --label go-pipeline-job=${GO_JOB_NAME} \
                   .
             - script: |
-                docker push registry.k8s.fscker.org:80/leprechaun/nginx-on-openshift
+                docker push registry.k8s.fscker.org/leprechaun/nginx-on-openshift
